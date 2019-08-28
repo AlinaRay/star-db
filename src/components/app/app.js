@@ -3,23 +3,47 @@ import React, {Component} from 'react';
 import './app.css';
 import Header from "../header";
 import RandomPlanet from "../random-planet";
-import ItemList from "../item-list";
-import PersonDetails from "../person-details";
+import ErrorButton from "../error-button";
+import ErrorIndicator from "../error-indicator";
+import PeoplePage from "../people-page";
 
 export default class App extends Component{
+
+    state = {
+        showRandomPlanet: true,
+        hasError: false,
+    };
+
+
+    toggleRandomPlanet = () => {
+      this.setState((prev)=> ({
+          showRandomPlanet: !prev.showRandomPlanet,
+      }))
+    };
+    componentDidCatch(error, errorInfo) {
+        console.log(error, 'catched');
+        this.setState({hasError: true});
+    }
+
     render() {
+        if (this.state.hasError) {
+            return <ErrorIndicator />
+        }
+        const randomPlanet = this.state.showRandomPlanet ? <RandomPlanet/> : null;
         return (
-            <div>
+            <div className="stardb-app">
                 <Header />
-                <RandomPlanet />
-                <div className="row mb-2">
-                    <div className="col-md-6">
-                        <ItemList />
-                    </div>
-                    <div className="col-md-6">
-                        <PersonDetails />
-                    </div>
+                {randomPlanet}
+                <div className="row mb-2 button-row">
+                    <button
+                        className="toggle-planet btn btn-warning btn-lg"
+                        onClick={this.toggleRandomPlanet}
+                    >
+                        Toggle Random Planet
+                    </button>
+                    <ErrorButton/>
                 </div>
+               <PeoplePage />
             </div>
         )
     }
