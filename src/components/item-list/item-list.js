@@ -5,14 +5,14 @@ const ItemList = (props) => {
        const {data, onItemSelected, children: renderLabel} = props;
         const items = data.map((item) => {
             const {id} = item;
-
+            const label = renderLabel(item);
             return (
                 <li
                     key={id}
                     className="list-group-item"
                     onClick={() => onItemSelected(id)}
                 >
-                    {renderLabel(item)}
+                    {label}
                 </li>
             )
         });
@@ -21,6 +21,10 @@ const ItemList = (props) => {
                 {items}
             </ul>
         )
+};
+
+ItemList.defaultProps = {
+    onItemSelected: () => {}
 };
 
 export default ItemList;
