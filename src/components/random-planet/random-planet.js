@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import SwapiService from  '../../services/swapi-service';
 import Spinner from '../spinner';
 import './random-planet.css';
-import PlanetDetails from "../planet-details";
 import ErrorIndicator from "../error-indicator";
 
 class RandomPlanet extends Component {
@@ -15,12 +14,10 @@ class RandomPlanet extends Component {
     };
 
     componentDidMount() {
-        console.log('component did mount');
         this.updatePlanet();
         this.interval = setInterval(this.updatePlanet, 5500);
     }
     componentWillUnmount() {
-        console.log('unmount');
         clearInterval(this.interval);
     }
 
@@ -46,7 +43,6 @@ class RandomPlanet extends Component {
 
     render() {
         const { planet , loading, error } = this.state;
-        console.log('render');
         const hasData = !(loading || error);
 
         const errorMessage = error ? <ErrorIndicator /> : null;

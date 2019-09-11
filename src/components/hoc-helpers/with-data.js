@@ -31,14 +31,15 @@ const withData = (View) => {
                    this.setState({
                        data,
                        loading: false,
-                   // }).catch(() => {
-                   //     this.setState({
-                   //         error: true,
-                   //         loading: false,
-                   //     })
                    });
                })
-        }
+                   .catch(() => {
+                   this.setState({
+                       error: true,
+                       loading: false,
+                   })
+               });
+    }
 
         render() {
             const {data, loading, error} = this.state;
