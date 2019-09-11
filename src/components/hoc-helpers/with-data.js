@@ -2,7 +2,7 @@ import Spinner from "../spinner";
 import React, {Component} from "react";
 import ErrorIndicator from '../error-indicator';
 
-const withData = (View, getData) => {
+const withData = (View) => {
     return class extends Component {
         state = {
             data: null,
@@ -26,7 +26,7 @@ const withData = (View, getData) => {
                 error: false,
             });
 
-           getData()
+           this.props.getData
                .then((data) => {
                    this.setState({
                        data,
