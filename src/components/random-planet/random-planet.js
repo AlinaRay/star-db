@@ -17,6 +17,16 @@ class RandomPlanet extends Component {
         updateInterval: 10000,
     };
 
+    static propTypes = {
+        updateInterval: (props, propName, componentName) => {
+            const value = props[propName];
+            if(typeof value === 'number' && !isNaN(value)) {
+                return null;
+            }
+            return new TypeError(`${componentName}: ${propName}`)
+        }
+    };
+
     componentDidMount() {
         const {updateInterval} = this.props;
         this.updatePlanet();
