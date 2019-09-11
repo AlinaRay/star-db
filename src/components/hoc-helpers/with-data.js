@@ -10,7 +10,7 @@ const withData = (View) => {
             error: false
         };
 
-        componentDidUpdate(prevProps, prevState, snapshot) {
+        componentDidUpdate(prevProps) {
             if(this.props.getData !== prevProps.getData) {
                 this.update();
             }
